@@ -1,40 +1,73 @@
-const express = require("express"); // Import express
-const client = require("./config/db"); // Import PostgreSQL client from db.js
-require("dotenv").config(); // Load environment variables
+require("dotenv").config(); // To load environment variables from .env
+const express = require("express");
+const sequelize = require("./config/db");
+const userRoutes = require("./routes/userRoute");
+const User = require("./models/User");
+const Supplier = require("./models/Supplier");
+const logger = require("./config/logger");
+const morgan = require("morgan");
 
-// Create an Express application
 const app = express();
+app.use(express.json()); // application/json
+app.use(morgan("combined", { stream: logger.stream.write })); // Log HTTP requests using morgan
 
-// Define a port to listen on
-const PORT = process.env.PORT || 3000;
+// Test database connection
+sequelize
+  .authenticate()
+  .then(() => logger.info("Database connected..."))
+  .catch((err) => logger.error("Error: " + err));
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+// Sync models and create tables if they do not exist
+sequelize
+  .sync({ force: false })
+  .then(() => logger.info("Models synced with database!"))
+  .catch((err) => logger.error("Error syncing models: " + err));
 
-// Example route to test database connection
-app.get("/test-db", async (req, res) => {
+// Routes
+app.use("/api", userRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  logger.info("GET / - Root route hit");
+  res.send("Purchase and Order Management System API is running");
+});
+
+// Create a user route (Example)
+app.post("/users", async (req, res) => {
+  logger.info("POST /users - Create user route hit");
   try {
-    const result = await client.query("SELECT NOW()"); // Test query to check if database is connected
-    res.status(200).json({
-      success: true,
-      message: "Database is connected",
-      currentTime: result.rows[0].now,
-    });
+    const { username } = req.body;
+    const user = await User.create({ username });
+    logger.info(`User created: ${JSON.stringify(user)}`);
+    res.json(user);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error connecting to the database",
-      error: error.message,
-    });
+    logger.error(`Error creating user: ${error.message}`);
+    res.status(500).json({ error: error.message });
   }
 });
 
-// Default route to check server status
-app.get("/", (req, res) => {
-  res.send("Hello, the server is running!");
+// Create a supplier route (Example)
+app.post("/suppliers", async (req, res) => {
+  logger.info("POST /suppliers - Create supplier route hit");
+  try {
+    const { supplierName, telephone, email, contactPerson, notes } = req.body;
+    const supplier = await Supplier.create({
+      supplierName,
+      telephone,
+      email,
+      contactPerson,
+      notes,
+    });
+    logger.info(`Supplier created: ${JSON.stringify(supplier)}`);
+    res.json(supplier);
+  } catch (error) {
+    logger.error(`Error creating supplier: ${error.message}`);
+    res.status(500).json({ error: error.message });
+  }
 });
 
-// Start the server
+// Start server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
 });
