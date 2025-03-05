@@ -1,7 +1,8 @@
-require("dotenv").config(); // To load environment variables from .env
+require("dotenv").config();
 const express = require("express");
 const sequelize = require("./config/db");
-const userRoutes = require("./routes/userRoute");
+const userRoute = require("./routes/userRoute");
+const supplierRoute = require("./routes/supplierRoute");
 const User = require("./models/User");
 const Supplier = require("./models/Supplier");
 const logger = require("./config/logger");
@@ -24,7 +25,8 @@ sequelize
   .catch((err) => logger.error("Error syncing models: " + err));
 
 // Routes
-app.use("/api", userRoutes);
+app.use("/api", userRoute);
+app.use("/api", supplierRoute);
 
 // Root route
 app.get("/", (req, res) => {
