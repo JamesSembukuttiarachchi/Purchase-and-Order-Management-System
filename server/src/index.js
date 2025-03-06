@@ -17,7 +17,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("combined", { stream: logger.stream.write })); // Log HTTP requests using morgan
 // Enable CORS for all routes
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Adjust based on your frontend URL
+  })
+);
+
 // Routes
 app.use("/api/users", userRoute);
 app.use("/api/suppliers", supplierRoute);
