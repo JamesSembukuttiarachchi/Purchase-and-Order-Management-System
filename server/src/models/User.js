@@ -33,19 +33,18 @@ User.init(
         // Generate a random plain password
         const randomPassword = crypto.randomBytes(8).toString("hex");
 
-        // Hash the password before saving
-        //const hashedPassword = await bcrypt.hash(randomPassword, 10);
-
-        // Set the password field to the hashed password
-        //user.password = hashedPassword;
         user.password = randomPassword;
 
-        // Add plain password to dataValues temporarily for response
         user.dataValues.password = randomPassword; // This is the plain password
 
         console.log(
           `Generated password for user ${user.username}: ${randomPassword}`
         );
+      },
+      beforeUpdate: async (user) => {
+        if (user.changed("password")) {
+          user.password = user.password;
+        }
       },
     },
   }

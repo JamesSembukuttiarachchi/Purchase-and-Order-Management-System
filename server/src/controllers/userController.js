@@ -33,4 +33,41 @@ const addUser = async (req, res) => {
   }
 };
 
-module.exports = { addUser };
+// Controller to update the password of the logged-in user
+const updatePassword = async (req, res) => {
+  try {
+    const { password } = req.body; // Accept new password from request body
+    const userId = req.user.id; // Assuming the user ID is in the request object (e.g., from JWT)
+
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    }
+
+    // Find the user by ID
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update the user's password with the plain password
+    user.password = password;
+
+    // Save the updated user
+    await user.save();
+
+    logger.info(`Password updated for user ${user.username}`);
+
+    res.status(200).json({
+      message: "Password updated successfully",
+      username: user.username,
+      role: user.role,
+    });
+  } catch (error) {
+    logger.error(`Error updating password: ${error.message}`);
+    res
+      .status(500)
+      .json({ message: "Error updating password", error: error.message });
+  }
+};
+
+module.exports = { addUser, updatePassword };
