@@ -6,9 +6,15 @@ const userRoute = require("./routes/userRoute");
 const supplierRoute = require("./routes/supplierRoute");
 const logger = require("./config/logger");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const app = express();
-app.use(express.json()); // application/json
+app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("combined", { stream: logger.stream.write })); // Log HTTP requests using morgan
 // Enable CORS for all routes
 app.use(cors());
