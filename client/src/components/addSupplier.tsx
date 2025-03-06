@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"; // ShadCN Label component
 import { Textarea } from "@/components/ui/textarea"; // ShadCN Textarea component
 import { useNavigate } from "react-router-dom";
 
-const AddSupplier: React.FC = () => {
+const AddSupplier = () => {
     const [supplierName, setSupplierName] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");

@@ -13,7 +13,7 @@ interface Supplier {
     notes: string;
 }
 
-const SupplierList: React.FC = () => {
+const SupplierList = () => {
     const [suppliers, setSuppliers] = useState<Supplier[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);

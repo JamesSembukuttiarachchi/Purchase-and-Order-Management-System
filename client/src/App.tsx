@@ -4,7 +4,7 @@ import SupplierList from './components/supplierList';
 import LoginForm from './components/loginForm';
 import AddSupplier from './components/addSupplier';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <Router>
       <Routes>
