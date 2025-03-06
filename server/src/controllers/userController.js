@@ -23,7 +23,7 @@ const addUser = async (req, res) => {
       id: user.id,
       username: user.username,
       role: user.role,
-      password: user.password, // Send the plain password for copying
+      password: user.dataValues.password, // Send the plain password for copying
     });
   } catch (error) {
     logger.error(`Error creating user: ${error.message}`);

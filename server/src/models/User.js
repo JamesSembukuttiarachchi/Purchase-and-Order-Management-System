@@ -18,7 +18,7 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true, // Allow null initially, as password will be set before creation
     },
     role: {
       type: DataTypes.STRING,
@@ -30,17 +30,19 @@ User.init(
     modelName: "User",
     hooks: {
       beforeCreate: async (user) => {
-        // Generate random password
+        // Generate a random plain password
         const randomPassword = crypto.randomBytes(8).toString("hex");
 
         // Hash the password before saving
-        const hashedPassword = await bcrypt.hash(randomPassword, 10);
+        //const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
         // Set the password field to the hashed password
-        user.password = hashedPassword;
+        //user.password = hashedPassword;
+        user.password = randomPassword;
 
         // Add plain password to dataValues temporarily for response
-        user.dataValues.password = randomPassword; // Return plain password for user to copy
+        user.dataValues.password = randomPassword; // This is the plain password
+
         console.log(
           `Generated password for user ${user.username}: ${randomPassword}`
         );

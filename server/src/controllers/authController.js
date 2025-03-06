@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const logger = require("../config/logger");
+require("dotenv").config();
 
 const login = async (req, res) => {
   const { username, password } = req.body;
@@ -12,7 +13,14 @@ const login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    // const match = await bcrypt.compare(password, user.password);
+    // if (!match) {
+    //   logger.warn(`Invalid password attempt for user: ${username}`);
+    //   return res.status(403).json({ message: "Invalid credentials" });
+    // }
+
+    // Compare the plain password directly
+    const match = password === user.dataValues.password; // Compare plain password with stored plain password
     if (!match) {
       logger.warn(`Invalid password attempt for user: ${username}`);
       return res.status(403).json({ message: "Invalid credentials" });

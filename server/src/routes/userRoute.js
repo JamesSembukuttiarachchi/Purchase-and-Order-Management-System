@@ -8,7 +8,7 @@ const { authenticateToken, isAdmin } = require("../middlewares/auth");
 router.post("/login", login);
 
 // Add user (only admin)
-//router.post("/adduser", authenticateToken, isAdmin, addUser);
-router.post("/adduser", addUser);
+router.post("/adduser", authenticateToken, isAdmin, addUser);
+//router.post("/adduser", addUser);
 
 module.exports = router;
