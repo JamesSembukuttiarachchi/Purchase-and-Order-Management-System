@@ -37,7 +37,7 @@ const getAllUsers = async (req, res) => {
   try {
     // Fetch all users from the database
     const users = await User.findAll({
-      attributes: ["id", "username", "role"], // You can include more attributes if needed
+      attributes: ["id", "username", "role", "createdAt"], // You can include more attributes if needed
     });
 
     // Check if users exist
