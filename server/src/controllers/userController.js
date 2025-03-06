@@ -32,6 +32,28 @@ const addUser = async (req, res) => {
       .json({ message: "Error creating user", error: error.message });
   }
 };
+// Controller to get all users
+const getAllUsers = async (req, res) => {
+  try {
+    // Fetch all users from the database
+    const users = await User.findAll({
+      attributes: ["id", "username", "role"], // You can include more attributes if needed
+    });
+
+    // Check if users exist
+    if (users.length === 0) {
+      return res.status(404).json({ message: "No users found" });
+    }
+
+    // Return the list of users
+    res.status(200).json(users);
+  } catch (error) {
+    logger.error(`Error retrieving users: ${error.message}`);
+    res
+      .status(500)
+      .json({ message: "Error retrieving users", error: error.message });
+  }
+};
 
 // Controller to update the password of the logged-in user
 const updatePassword = async (req, res) => {
@@ -70,4 +92,4 @@ const updatePassword = async (req, res) => {
   }
 };
 
-module.exports = { addUser, updatePassword };
+module.exports = { addUser, updatePassword, getAllUsers };
