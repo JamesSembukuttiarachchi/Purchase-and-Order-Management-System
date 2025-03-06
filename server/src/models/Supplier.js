@@ -9,6 +9,7 @@ Supplier.init(
     supplierName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
       },
@@ -16,6 +17,7 @@ Supplier.init(
     telephone: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
       },
@@ -23,6 +25,7 @@ Supplier.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: true,
         notEmpty: true,

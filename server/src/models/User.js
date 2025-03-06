@@ -18,11 +18,11 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: "staff", // Can be 'admin' or 'staff'
+      defaultValue: "staff",
     },
   },
   {
@@ -32,7 +32,15 @@ User.init(
       beforeCreate: async (user) => {
         // Generate random password
         const randomPassword = crypto.randomBytes(8).toString("hex");
-        user.password = await bcrypt.hash(randomPassword, 10); // Hash the password
+
+        // Hash the password before saving
+        const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
+        // Set the password field to the hashed password
+        user.password = hashedPassword;
+
+        // Add plain password to dataValues temporarily for response
+        user.dataValues.password = randomPassword; // Return plain password for user to copy
         console.log(
           `Generated password for user ${user.username}: ${randomPassword}`
         );
