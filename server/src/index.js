@@ -3,8 +3,6 @@ const express = require("express");
 const sequelize = require("./config/db");
 const userRoute = require("./routes/userRoute");
 const supplierRoute = require("./routes/supplierRoute");
-const User = require("./models/User");
-const Supplier = require("./models/Supplier");
 const logger = require("./config/logger");
 const morgan = require("morgan");
 
