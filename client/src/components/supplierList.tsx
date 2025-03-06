@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useNavigate } from 'react-router-dom';
+
 
 interface Supplier {
     id: number;
@@ -18,9 +19,14 @@ const SupplierList: React.FC = () => {
     const [suppliers, setSuppliers] = useState<Supplier[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
+
+    const handleAddSupplierButton = () => {
+        navigate('/addsupplier'); // Navigate to /addsupplier when button is clicked
+    };
+
 
     useEffect(() => {
-        // Fetch supplier data from API using fetch
         const fetchSuppliers = async () => {
             try {
                 const response = await fetch("http://localhost:3000/api/suppliers");
@@ -28,7 +34,7 @@ const SupplierList: React.FC = () => {
                     throw new Error("Error fetching suppliers");
                 }
                 const data = await response.json();
-                setSuppliers(data); // Set the suppliers data
+                setSuppliers(data);
                 setLoading(false);
             } catch (error) {
                 setError("Error fetching suppliers");
@@ -62,8 +68,11 @@ const SupplierList: React.FC = () => {
                                 <TableHead>Email</TableHead>
                                 <TableHead>Phone</TableHead>
                                 <TableHead>Notes</TableHead>
-                                <TableHead>Actions</TableHead>
-                                <TableHead>Actions</TableHead>
+                                <TableHead><Button className="bg-green-500 hover:bg-green-700 text-white"
+                                    onClick={handleAddSupplierButton}>
+                                    Add Supplier
+                                </Button></TableHead>
+                                {/* <TableHead>Actions</TableHead> */}
                             </TableRow>
                         </TableHeader>
                         <TableBody>
