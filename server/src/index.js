@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const sequelize = require("./config/db");
 const userRoute = require("./routes/userRoute");
@@ -9,7 +10,8 @@ const morgan = require("morgan");
 const app = express();
 app.use(express.json()); // application/json
 app.use(morgan("combined", { stream: logger.stream.write })); // Log HTTP requests using morgan
-
+// Enable CORS for all routes
+app.use(cors());
 // Routes
 app.use("/api/users", userRoute);
 app.use("/api/suppliers", supplierRoute);
@@ -28,7 +30,7 @@ sequelize
 
 // Sync the database to apply unique constraints
 sequelize
-  .sync({ alter: true }) // Use 'alter: true' to update the database schema with changes
+  .sync({ alter: true })
   .then(() => {
     logger.info("Database synced with unique constraints.");
   })
