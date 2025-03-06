@@ -2,15 +2,49 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate(); // Get the navigate function
+
 
     // Handle login functionality
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Logging in with:", username, password);
+        try {
+            const response = await fetch("http://localhost:3000/api/users/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("Logged in successfully:", data);
+                // Store the token in localStorage or wherever appropriate
+                localStorage.setItem("token", data.token);
+                // Redirect to the dashboard or any secure route
+                alert("Login successful!");
+                navigate('/suppliers'); // Navigate to /dashboard after login
+
+            } else {
+                setErrorMessage(data.message || "Login failed.");
+                console.log("Login failed:", data);
+            }
+        } catch (error) {
+            setErrorMessage("An error occurred during login.");
+            console.error("Error:", error);
+        }
     };
 
     // Handle password reset functionality
@@ -74,6 +108,9 @@ const LoginForm = () => {
                                 </Button>
                             </div>
                         </div>
+                        {errorMessage && (
+                            <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+                        )}
                         <div className="flex flex-col space-y-2">
                             <Button type="submit" className="w-full bg-blue-500 text-white">
                                 Log In
