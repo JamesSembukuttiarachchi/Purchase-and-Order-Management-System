@@ -123,7 +123,7 @@ const SupplierList = () => {
                 backgroundAttachment: "fixed",
             }}>
             <Card className="shadow-lg">
-                <div className="mb-6 flex justify-between items-center p-6">
+                <div className="flex justify-between items-center px-6">
                     <CardTitle className="text-left text-xl">Supplier List</CardTitle>
                     <Button
                         className="bg-green-500 hover:bg-green-700 text-white"

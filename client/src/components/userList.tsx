@@ -65,7 +65,7 @@ const UserList = () => {
                 backgroundAttachment: "fixed",
             }}>
             <Card className="shadow-lg w-2/3">
-                <div className="mb-6 flex justify-between items-center p-6">
+                <div className="flex justify-between items-center px-6">
                     <CardTitle className="text-left text-xl">Users</CardTitle>
                     <Button
                         className="bg-blue-500 hover:bg-blue-700 text-white"
