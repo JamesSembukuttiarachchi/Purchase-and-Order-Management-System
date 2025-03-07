@@ -19,7 +19,7 @@ app.use(morgan("combined", { stream: logger.stream.write })); // Log HTTP reques
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: "http://localhost:5173", // Adjust based on your frontend URL
+    origin: "http://localhost:5173",
   })
 );
 

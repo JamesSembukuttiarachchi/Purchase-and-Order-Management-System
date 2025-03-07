@@ -13,7 +13,7 @@ const login = async (req, res) => {
     }
 
     // Compare the plain password directly
-    const match = password === user.dataValues.password; // Compare plain password with stored plain password
+    const match = password === user.dataValues.password;
     if (!match) {
       logger.warn(`Invalid password attempt for user: ${username}`);
       return res.status(403).json({ message: "Invalid credentials" });

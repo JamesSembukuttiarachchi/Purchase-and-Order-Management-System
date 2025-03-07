@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import bgImage from "../assets/bg-shrimpfeedsbusiness.jpg";
 
-
-// Define the types for user data
 interface User {
     id: number;
     username: string;
@@ -60,8 +58,8 @@ const UserList = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                minHeight: "100vh", // Ensures full-screen height
-                width: "100vw", // Ensures full-screen width
+                minHeight: "100vh",
+                width: "100vw",
                 backgroundAttachment: "fixed",
             }}>
             <Card className="shadow-lg w-2/3">

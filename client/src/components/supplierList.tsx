@@ -118,8 +118,8 @@ const SupplierList = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                minHeight: "100vh", // Ensures full-screen height
-                width: "100vw", // Ensures full-screen width
+                minHeight: "100vh",
+                width: "100vw",
                 backgroundAttachment: "fixed",
             }}>
             <Card className="shadow-lg">

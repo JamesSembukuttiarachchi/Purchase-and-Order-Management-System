@@ -35,8 +35,7 @@ const LoginForm = () => {
                 localStorage.setItem("token", data.token);
                 // Show success toast
                 toast.success("Login successful!");
-                // Redirect to the dashboard or any secure route
-                navigate('/suppliers'); // Navigate to /suppliers after login
+                navigate('/suppliers');
             } else {
                 setErrorMessage(data.message || "Login failed.");
                 // Show error toast
@@ -64,8 +63,8 @@ const LoginForm = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                minHeight: "100vh", // Ensures full-screen height
-                width: "100vw", // Ensures full-screen width
+                minHeight: "100vh",
+                width: "100vw",
                 backgroundAttachment: "fixed",
             }}>
             <Card className="w-96 shadow-lg">

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input"; // ShadCN Input component
-import { Button } from "@/components/ui/button"; // ShadCN Button component
-import { Card, CardHeader, CardContent } from "@/components/ui/card"; // ShadCN Card for UI structure
-import { Label } from "@/components/ui/label"; // ShadCN Label component
-import { Textarea } from "@/components/ui/textarea"; // ShadCN Textarea component
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useNavigate } from "react-router-dom";
 
 const AddSupplier = () => {
@@ -38,10 +38,8 @@ const AddSupplier = () => {
             });
 
             if (response.ok) {
-                // Successfully added supplier, navigate to the supplier list or any desired page
                 navigate("/suppliers");
             } else {
-                // Handle error
                 const result = await response.json();
                 setError(result.error || "Failed to add supplier.");
             }

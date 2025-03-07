@@ -8,11 +8,10 @@ const {
   deleteSupplier,
 } = require("../controllers/supplierController");
 
-// Routes for supplier management
-router.post("/", createSupplier); // Create supplier
-router.get("/", getSuppliers); // Get all suppliers
-router.get("/:id", getSupplierById); // Get supplier by ID
-router.put("/:id", updateSupplier); // Update supplier details
-router.delete("/:id", deleteSupplier); // Delete supplier
+router.post("/", createSupplier);
+router.get("/", getSuppliers);
+router.get("/:id", getSupplierById);
+router.put("/:id", updateSupplier);
+router.delete("/:id", deleteSupplier);
 
 module.exports = router;

@@ -25,14 +25,14 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ setShowResetForm 
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`, // Assuming JWT token stored in localStorage
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({ password }),
             });
 
             if (response.ok) {
                 toast.success("Password updated successfully");
-                setShowResetForm(false); // Close the form after success
+                setShowResetForm(false);
             } else {
                 const data = await response.json();
                 toast.error(data.message || "Failed to update password");

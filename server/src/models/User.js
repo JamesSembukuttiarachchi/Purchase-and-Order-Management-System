@@ -38,7 +38,7 @@ User.init(
 
         user.password = hashedPassword;
 
-        user.dataValues.password = randomPassword; // This is the plain password (for logging)
+        user.dataValues.password = randomPassword;
 
         console.log(
           `Generated and hashed password for user ${user.username}: ${randomPassword}`

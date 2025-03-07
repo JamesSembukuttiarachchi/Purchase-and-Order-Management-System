@@ -4,26 +4,23 @@ const logger = require("../config/logger");
 // Controller for adding a new user (admin-only)
 const addUser = async (req, res) => {
   try {
-    const { username, role } = req.body; // Accept role from request body
+    const { username, role } = req.body;
 
-    // If role is provided, use it; otherwise, default to "staff"
     const userRole = role || "staff";
 
     logger.info(
       `Adding new user with username: ${username} and role: ${userRole}`
     );
 
-    // Create a new user with the provided role
     const user = await User.create({ username, role: userRole });
 
     logger.info(`User created successfully: ${JSON.stringify(user)}`);
 
-    // Return the user along with the generated password (for copying to clipboard)
     res.status(201).json({
       id: user.id,
       username: user.username,
       role: user.role,
-      password: user.dataValues.password, // Send the plain password for copying
+      password: user.dataValues.password,
     });
   } catch (error) {
     logger.error(`Error creating user: ${error.message}`);
@@ -37,7 +34,7 @@ const getAllUsers = async (req, res) => {
   try {
     // Fetch all users from the database
     const users = await User.findAll({
-      attributes: ["id", "username", "role", "createdAt"], // You can include more attributes if needed
+      attributes: ["id", "username", "role", "createdAt"],
     });
 
     // Check if users exist
@@ -58,8 +55,8 @@ const getAllUsers = async (req, res) => {
 // Controller to update the password of the logged-in user
 const updatePassword = async (req, res) => {
   try {
-    const { password } = req.body; // Accept new password from request body
-    const userId = req.user.id; // Assuming the user ID is in the request object (e.g., from JWT)
+    const { password } = req.body;
+    const userId = req.user.id;
 
     if (!password) {
       return res.status(400).json({ message: "Password is required" });
