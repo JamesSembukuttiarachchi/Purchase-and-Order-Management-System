@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useNavigate } from 'react-router-dom';
+import bgImage from "../assets/bg-shrimpfeedsbusiness.jpg";
+
 interface Supplier {
     id: number;
     supplierName: string;
@@ -110,7 +112,16 @@ const SupplierList = () => {
     }
 
     return (
-        <div className="p-8 space-y-4">
+        <div className="p-8 space-y-4"
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                minHeight: "100vh", // Ensures full-screen height
+                width: "100vw", // Ensures full-screen width
+                backgroundAttachment: "fixed",
+            }}>
             <Card className="shadow-lg">
                 <div className="mb-6 flex justify-between items-center p-6">
                     <CardTitle className="text-left text-xl">Supplier List</CardTitle>

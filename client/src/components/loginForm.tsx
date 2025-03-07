@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import bgImage from "../assets/bg-shrimpfeedsbusiness.jpg";
 
 
 const LoginForm = () => {
@@ -64,7 +65,16 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-screen"
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                minHeight: "100vh", // Ensures full-screen height
+                width: "100vw", // Ensures full-screen width
+                backgroundAttachment: "fixed",
+            }}>
             <Card className="w-96 shadow-lg">
                 <CardHeader>
                     <CardTitle className="text-center text-xl">Login</CardTitle>
