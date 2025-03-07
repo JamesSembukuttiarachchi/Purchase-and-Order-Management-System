@@ -6,6 +6,7 @@ import AddSupplier from './components/addSupplier';
 import UserList from './components/userList';
 import AddUser from './components/addUser';
 import Header from './components/Header'; // Import the Header component
+import Footer from './components/Footer';
 
 const App = () => {
   const location = useLocation();
@@ -15,7 +16,7 @@ const App = () => {
 
   return (
     <>
-      {!hideHeaderOnLogin && <Header />} {/* Render the header except on login */}
+      {!hideHeaderOnLogin && <Header />}
       <Routes>
         <Route path="/" element={<LoginForm />} />
         <Route path="/suppliers" element={<SupplierList />} />
@@ -23,6 +24,8 @@ const App = () => {
         <Route path="/users" element={<UserList />} />
         <Route path="/adduser" element={<AddUser />} />
       </Routes>
+      {!hideHeaderOnLogin && <Footer />}
+
     </>
   );
 };
