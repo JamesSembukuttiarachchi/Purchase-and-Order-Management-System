@@ -112,7 +112,7 @@ const SupplierList = () => {
     }
 
     return (
-        <div className="p-8 space-y-4"
+        <div className="p-8 space-y-4 flex justify-center items-center h-screen"
             style={{
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",

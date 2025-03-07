@@ -54,7 +54,7 @@ const UserList = () => {
     if (error) return <div className="text-center py-4 text-red-600">{error}</div>;
 
     return (
-        <div className="p-8 space-y-4 flex justify-center"
+        <div className="p-8 space-y-4 flex justify-center items-center h-screen"
             style={{
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",

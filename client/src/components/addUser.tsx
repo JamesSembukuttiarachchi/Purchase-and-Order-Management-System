@@ -5,8 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { toast } from "react-toastify";
+import bgImage from "../assets/bg-shrimpfeedsbusiness.jpg";
+import { useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState<string>("");
     const [role, setRole] = useState<string>("staff");
     const [loading, setLoading] = useState<boolean>(false);
@@ -62,11 +65,25 @@ const AddUser = () => {
                 toast.success("Password copied to clipboard!");
             });
         }
+        navigate('/users')
+    };
+    // Function to copy password to clipboard
+    const cancelButton = () => {
+        navigate('/users');
     };
 
     return (
-        <div className="container mx-auto my-8 p-4">
-            <Card className="max-w-md mx-auto p-6 border border-gray-300 rounded-lg shadow-md">
+        <div className="mx-auto my-8 p-4 flex justify-center items-center min-h-screen"
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                minHeight: "100vh", // Ensures full-screen height
+                width: "100vw", // Ensures full-screen width
+                backgroundAttachment: "fixed",
+            }}>
+            <Card className="w-1/3 mx-auto p-6 border border-gray-300 rounded-lg shadow-md">
                 <h2 className="text-2xl font-semibold text-center mb-6">Add New User</h2>
                 <form onSubmit={handleSubmit}>
                     {/* Username Field */}
@@ -121,13 +138,22 @@ const AddUser = () => {
                     )}
 
                     {/* Submit Button */}
-                    <Button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400"
-                    >
-                        {loading ? "Adding..." : "Add User"}
-                    </Button>
+                    <div className="flex justify-center space-x-10">
+                        <Button
+                            type="submit"
+                            disabled={loading}
+                            className="mt-8 bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400"
+                        >
+                            {loading ? "Adding..." : "Add User"}
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={cancelButton}
+                            className="mt-8 bg-red-400 text-white hover:bg-red-500"
+                        >
+                            Cancel
+                        </Button>
+                    </div>
                 </form>
             </Card>
         </div>
