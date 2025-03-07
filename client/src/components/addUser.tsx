@@ -126,7 +126,7 @@ const AddUser = () => {
                     {/* Generated Password Section */}
                     {generatedPassword && (
                         <div className="mb-4 text-center">
-                            <p className="text-lg">Password Generated </p>
+                            <p className="text-lg">Generated Password: {generatedPassword}</p>
                             <Button
                                 type="button"
                                 onClick={copyToClipboard}
