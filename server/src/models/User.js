@@ -33,17 +33,21 @@ User.init(
         // Generate a random plain password
         const randomPassword = crypto.randomBytes(8).toString("hex");
 
-        user.password = randomPassword;
+        // Hash the password before saving
+        const hashedPassword = await bcrypt.hash(randomPassword, 10);
 
-        user.dataValues.password = randomPassword; // This is the plain password
+        user.password = hashedPassword;
+
+        user.dataValues.password = randomPassword; // This is the plain password (for logging)
 
         console.log(
-          `Generated password for user ${user.username}: ${randomPassword}`
+          `Generated and hashed password for user ${user.username}: ${randomPassword}`
         );
       },
       beforeUpdate: async (user) => {
         if (user.changed("password")) {
-          user.password = user.password;
+          // Hash the password before saving it
+          user.password = await bcrypt.hash(user.password, 10);
         }
       },
     },
