@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 // Define the types for user data
 interface User {
@@ -49,38 +52,38 @@ const UserList = () => {
     if (error) return <div className="text-center py-4 text-red-600">{error}</div>;
 
     return (
-        <div className="container mx-auto p-6">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">User List</h2>
+        <div className="p-8 space-y-4 flex justify-center">
+            <Card className="shadow-lg w-2/3">
+                <div className="mb-6 flex justify-between items-center p-6">
+                    <CardTitle className="text-left text-xl">Users</CardTitle>
+                    <Button
+                        className="bg-blue-500 hover:bg-blue-700 text-white"
+                        onClick={handleAddUserButton}>
+                        Add User
+                    </Button>
+                </div>
 
-            <div className="mb-6 flex justify-end">
-                <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-                    onClick={handleAddUserButton}>
-                    Add User
-                </button>
-            </div>
-
-            <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-                <table className="min-w-full table-auto">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Username</th>
-                            <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Role</th>
-                            <th className="py-3 px-6 text-left text-sm font-medium text-gray-700">Date Joined</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user) => (
-                            <tr key={user.id} className="hover:bg-gray-50 transition duration-200">
-                                <td className="py-3 px-6 text-sm text-gray-800">{user.username}</td>
-                                <td className="py-3 px-6 text-sm text-gray-800">{ }</td>
-                                <td className="py-3 px-6 text-sm text-gray-600">
-                                    {new Date(user.createdAt).toLocaleDateString()}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                <CardContent>
+                    <Table className="min-w-full bg-white border border-gray-200">
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Username</TableHead>
+                                <TableHead>Date Joined</TableHead>
+                                <TableHead>Role</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {users.map((user) => (
+                                <TableRow key={user.id}>
+                                    <TableCell>{user.username}</TableCell>
+                                    <TableCell>{new Date(user.createdAt).toLocaleDateString()}</TableCell>
+                                    <TableCell>{/* Role field (you may want to fill in later) */}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            </Card>
         </div>
     );
 };

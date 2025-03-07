@@ -112,9 +112,15 @@ const SupplierList = () => {
     return (
         <div className="p-8 space-y-4">
             <Card className="shadow-lg">
-                <CardHeader>
-                    <CardTitle className="text-center text-xl">Supplier List</CardTitle>
-                </CardHeader>
+                <div className="mb-6 flex justify-between items-center p-6">
+                    <CardTitle className="text-left text-xl">Supplier List</CardTitle>
+                    <Button
+                        className="bg-green-500 hover:bg-green-700 text-white"
+                        onClick={handleAddSupplierButton}>
+                        Add Supplier
+                    </Button>
+                </div>
+
                 <CardContent>
                     <Table className="min-w-full bg-white border border-gray-200">
                         <TableHeader>
@@ -125,11 +131,7 @@ const SupplierList = () => {
                                 <TableHead>Phone</TableHead>
                                 <TableHead>Notes</TableHead>
                                 <TableHead>
-                                    <Button
-                                        className="bg-green-500 hover:bg-green-700 text-white"
-                                        onClick={handleAddSupplierButton}>
-                                        Add Supplier
-                                    </Button>
+
                                 </TableHead>
                             </TableRow>
                         </TableHeader>
