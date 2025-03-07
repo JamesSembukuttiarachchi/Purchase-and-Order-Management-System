@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-green-500 p-4 rounded-lg shadow sm:flex sm:items-center sm:justify-between sm:p-6 xl:p-8 fixed bottom-0 left-0">
+        <footer className="w-full bg-green-600 p-4 rounded-lg shadow sm:flex sm:items-center sm:justify-between sm:p-6 xl:p-8 fixed bottom-0 left-0">
             <p className="mb-4 text-sm text-center text-white sm:mb-0">
                 &copy; 2019-2022 <a href="https://xyz.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">Flowbite.com</a>. All rights reserved.
             </p>

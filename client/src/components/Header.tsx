@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 
     return (
         <>
-            <header className="w-full bg-green-500 p-4 shadow-md flex justify-between items-center fixed top-0 sm:p-6 xl:p-8">
+            <header className="w-full bg-green-600 brightness-100 p-4 shadow-md flex justify-between items-center fixed top-0 sm:p-6 xl:p-8">
                 {/* Left - Company Name */}
                 <div className="text-4xl font-bold text-white">XYZ</div>
 
