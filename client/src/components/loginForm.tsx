@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import bgImage from "../assets/bg-shrimpfeedsbusiness.jpg";
-
+import { toast } from 'react-toastify';
 
 const LoginForm = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
-
 
     // Handle login functionality
     const handleLogin = async (e: React.FormEvent) => {
@@ -34,16 +33,20 @@ const LoginForm = () => {
                 console.log("Logged in successfully:", data);
                 // Store the token in localStorage or wherever appropriate
                 localStorage.setItem("token", data.token);
+                // Show success toast
+                toast.success("Login successful!");
                 // Redirect to the dashboard or any secure route
-                alert("Login successful!");
-                navigate('/suppliers'); // Navigate to /dashboard after login
-
+                navigate('/suppliers'); // Navigate to /suppliers after login
             } else {
                 setErrorMessage(data.message || "Login failed.");
+                // Show error toast
+                toast.error(data.message || "Login failed.");
                 console.log("Login failed:", data);
             }
         } catch (error) {
             setErrorMessage("An error occurred during login.");
+            // Show error toast
+            toast.error("An error occurred during login.");
             console.error("Error:", error);
         }
     };
@@ -52,16 +55,6 @@ const LoginForm = () => {
     const handleResetPassword = () => {
         console.log("Redirecting to reset password...");
         // Implement your reset password functionality or redirect here
-    };
-
-    // Copy password to clipboard
-    const handleCopyPassword = async () => {
-        try {
-            await navigator.clipboard.writeText(password);
-            alert("Password copied to clipboard!");
-        } catch (err) {
-            console.error("Failed to copy password: ", err);
-        }
     };
 
     return (
@@ -109,13 +102,6 @@ const LoginForm = () => {
                                     className="mt-1 block w-full"
                                     required
                                 />
-                                <Button
-                                    type="button"
-                                    className="ml-2 bg-gray-200 text-black"
-                                    onClick={handleCopyPassword}
-                                >
-                                    Copy
-                                </Button>
                             </div>
                         </div>
                         {errorMessage && (
