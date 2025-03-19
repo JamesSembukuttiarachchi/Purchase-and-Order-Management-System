@@ -119,5 +119,4 @@ const AddSupplier = () => {
         </Card>
     );
 };
-
 export default AddSupplier;
